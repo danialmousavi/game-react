@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadDetail } from "../actions/detailAction";
 const GameCard=({name,id,released,background})=>{
     const dispatch=useDispatch()
     const loadDetailhandler=()=>{
         dispatch(loadDetail(id))
+        
     }
     return(
         <>
-            <GameStyled onClick={loadDetailhandler} key={id}>
+            <GameStyled onClick={loadDetailhandler}>
                 <h3>{name}</h3>
                 <p>{released}</p>
                 <img src={background} alt="" />
@@ -24,8 +25,10 @@ const GameStyled=styled(motion.div)`
     border-radius:1rem;
     img{
         width:100%;
-        height:300px;
+        height:40vh;
         border-radius:0 0 1rem 1rem;
+        display:block;
+        object-fit:cover;
     }
 `
 export default GameCard;

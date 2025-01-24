@@ -5,33 +5,36 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import GameCard from "./components/GameCard";
 import './main.css'
+import GameDetail from "./components/GameDetail";
 function App() {
   const dispatch =useDispatch();
   useEffect(()=>{
     dispatch(loadGames());
   },[dispatch])
   const {newGames,popular,upcoming}=useSelector(state=>state.games);
-  console.log(newGames,popular,upcoming);
   
+  const {game}=useSelector((state)=>state.detail);
+
   return (
     <>
-      <GameList>
+      <GameList >
+        {game.id&& <GameDetail/>}
         <h2>Upcomig Games</h2>
         <Games>
             {upcoming.map(game=>(
-              <GameCard name={game.name} id={game.id} released={game.released} background={game.background_image} />
+              <GameCard key={game.id} name={game.name} id={game.id} released={game.released} background={game.background_image} />
             ))}
         </Games>
         <h2>popular</h2>
         <Games>
             {popular.map(game=>(
-              <GameCard name={game.name} id={game.id} released={game.released} background={game.background_image}/>
+              <GameCard key={game.id} name={game.name} id={game.id} released={game.released} background={game.background_image}/>
             ))}
         </Games>
         <h2>newGames</h2>
         <Games>
             {newGames.map(game=>(
-              <GameCard name={game.name} id={game.id} released={game.released} background={game.background_image}/>
+              <GameCard key={game.id} name={game.name} id={game.id} released={game.released} background={game.background_image}/>
             ))}
         </Games>
       </GameList>
@@ -44,10 +47,18 @@ h2{
   padding:5rem 0rem;
 }
 `
-const Games=styled(motion.div)`
-min-height:80vh;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:5rem 3rem
-`
+const Games = styled(motion.div)`
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 5rem 3rem;
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem 1rem;
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1rem 0.5rem;
+  }
+`;
 export default App;
