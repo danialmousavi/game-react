@@ -6,20 +6,31 @@ import { motion } from "framer-motion";
 import GameCard from "./components/GameCard";
 import './main.css'
 import GameDetail from "./components/GameDetail";
+import Nav from "./components/Nav";
+import { div } from "framer-motion/client";
 function App() {
   const dispatch =useDispatch();
   useEffect(()=>{
     dispatch(loadGames());
   },[dispatch])
-  const {newGames,popular,upcoming}=useSelector(state=>state.games);
+  const {newGames,popular,upcoming,searched}=useSelector(state=>state.games);
   
   const {game}=useSelector((state)=>state.detail);
 
   return (
     <>
       <GameList >
+        <Nav/>
         {game.id&& <GameDetail/>}
-        <h2>Upcomig Games</h2>
+        {searched.length?<div>
+          <h2>Searched Games</h2>
+        <Games>
+            {searched.map(game=>(
+              <GameCard key={game.id} name={game.name} id={game.id} released={game.released} background={game.background_image} />
+            ))}
+        </Games>
+        </div>:''}
+        <h2>Upcoming Games</h2>
         <Games>
             {upcoming.map(game=>(
               <GameCard key={game.id} name={game.name} id={game.id} released={game.released} background={game.background_image} />

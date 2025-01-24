@@ -12,6 +12,37 @@ const GameDetail=()=>{
         }
         
     }
+    //platform icon
+    const platformIcon=(platform)=>{
+        switch(platform){
+            case 'PlayStation 5':
+                return <i key={'playstation'} className="fa-brands fa-playstation"></i>
+            case 'PlayStation 4':
+                return <i key={'playstation'} className="fa-brands fa-playstation"></i>
+            case 'PC':
+                return <i key={'desktop'} className="fa-solid fa-desktop"></i>
+            case 'Xbox One':    
+                return <i key={'xbox'} className="fa-brands fa-xbox"></i>
+            case 'Xbox Series S/X':
+                return <i key={'xbox'} className="fa-brands fa-xbox"></i>
+            default :
+                return <i key={'steam'} className="fa-brands fa-steam"></i>
+        }
+    }
+    //platform rating start
+    const ratingStar=()=>{
+        const stars=[];
+        const rating=Math.floor(game.rating);
+        for(let i=1;i<=5;i++){
+            if(i<=rating){
+                stars.push(<i className="fa-solid fa-star"></i>);
+            }
+            else{
+                stars.push(<i className="fa-regular fa-star"></i>)
+            }
+        }
+        return stars;
+    }
     return(
         <>
         <div className="card-shadow" onClick={exitHandler}>
@@ -19,14 +50,14 @@ const GameDetail=()=>{
                 <div className="status">
                     <div className="rating">
                         <h3>{game.name}</h3>
-                        <p>Rating:{game.rating}</p>
+                        <p>Rating:{ratingStar()}</p>
                     </div>
                     
                     <div className="info">
                         <h3>platforms</h3>
                         <div className="platforms">
                             {game.platforms.map(data=>(
-                                <h3 key={data.platform.id}>{data.platform.name}</h3>
+                                platformIcon(data.platform.name)
                             ))}
                         </div>
                     </div>

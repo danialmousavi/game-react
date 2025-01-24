@@ -41,3 +41,4 @@ export const newGamesURL=()=>`${base_url}${new_games}`;
 export const gameDetailUrl=(game_id)=>`${base_url}games/${game_id}?key=${API_KEY}`
 export const gameScreenshotsUrl=(game_id)=>`${base_url}games/${game_id}/screenshots?key=${API_KEY}`
 // Example output: https://api.rawg.io/api/games/12345/screenshots?key=c91d0b808e254bd0b57e44f9deb4e72f
+export const searchGameUrl = (game_name) => `${base_url}games?key=${API_KEY}&search=${game_name}&page_size=10`;
