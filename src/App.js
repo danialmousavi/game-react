@@ -8,6 +8,7 @@ import './main.css'
 import GameDetail from "./components/GameDetail";
 import Nav from "./components/Nav";
 import { div } from "framer-motion/client";
+import { fadeIn } from "./animation";
 function App() {
   const dispatch =useDispatch();
   useEffect(()=>{
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <>
-      <GameList >
+      <GameList variants={fadeIn} initial="hidden" animate="show">
         <Nav/>
         {game.id&& <GameDetail/>}
         {searched.length?<div>

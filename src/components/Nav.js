@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { fetchSearch ,clearSearched} from '../actions/gameActions';
 import logo from '../logo.webp'
 import { useDispatch } from 'react-redux';
+import { fadeIn } from '../animation';
 const Nav=()=>{
     const dispatch=useDispatch();
     const [text,setText]=useState('');
@@ -18,7 +19,7 @@ const Nav=()=>{
     }
     return(
         <>
-        <div className="nav">
+        <div className="nav" variants={fadeIn} initial="hidden" animate="show">
             <div className="logo" onClick={clearSearch}>
                 <img src={logo} alt="" />
                 <h1>GameHub</h1>

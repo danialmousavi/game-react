@@ -1,7 +1,9 @@
-import { h3, img } from "framer-motion/client";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { emptyDetail } from "../actions/detailAction";
+import { popUp2 } from "../animation";
+import { motion } from "framer-motion";
+import { fadeIn } from "../animation"; // Add this line to import fadeIn
 const GameDetail=()=>{
     const {game,screen}=useSelector((state)=>state.detail);
     const dispatch=useDispatch()
@@ -45,7 +47,7 @@ const GameDetail=()=>{
     }
     return(
         <>
-        <div className="card-shadow" onClick={exitHandler}>
+        <motion.div className="card-shadow" onClick={exitHandler} variants={popUp2} initial="hidden" animate="show" >
             <div className="detail">
                 <div className="status">
                     <div className="rating">
@@ -74,7 +76,7 @@ const GameDetail=()=>{
                 ))}
             </div>
             </div>
-        </div>
+        </motion.div>
         </>
     )
 }

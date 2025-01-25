@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { loadDetail } from "../actions/detailAction";
+import { popUp } from "../animation";
 const GameCard=({name,id,released,background})=>{
     const dispatch=useDispatch()
     const loadDetailhandler=()=>{
@@ -10,7 +11,7 @@ const GameCard=({name,id,released,background})=>{
     }
     return(
         <>
-            <GameStyled onClick={loadDetailhandler}>
+            <GameStyled onClick={loadDetailhandler} variants={popUp} initial="hidden" animate="show">
                 <h3>{name}</h3>
                 <p>{released}</p>
                 <img src={background} alt="" />
